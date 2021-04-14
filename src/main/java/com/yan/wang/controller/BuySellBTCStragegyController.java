@@ -20,6 +20,9 @@ public class BuySellBTCStragegyController {
     @GetMapping("/list")
     public String listStrategy(Model model) {
         List<BuySellBtcUsd> buySellBtcUsdList = finDataService.getListBuySellBtcUsd();
+        if (buySellBtcUsdList.size() == 0) {
+            System.out.println("size = 0");
+        }
         model.addAttribute("buySellBtcUsdList", buySellBtcUsdList);
         return "list_strategy";
     }
