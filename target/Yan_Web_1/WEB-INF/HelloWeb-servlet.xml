@@ -1,4 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans [
+        <!ELEMENT beans (context:component-scan|mvc:annotation-driven|bean|tx:annotation-driven)*>
+        <!ATTLIST beans
+                xmlns CDATA #REQUIRED
+                xmlns:xsi CDATA #REQUIRED
+                xmlns:context CDATA #REQUIRED
+                xmlns:mvc CDATA #REQUIRED
+                xmlns:tx CDATA #REQUIRED
+                xsi:schemaLocation CDATA #REQUIRED>
+        <!ELEMENT context:component-scan (#PCDATA)>
+        <!ATTLIST context:component-scan
+                base-package CDATA #REQUIRED>
+        <!ELEMENT mvc:annotation-driven (#PCDATA)>
+        <!ELEMENT bean (property)*>
+        <!ATTLIST bean
+                class CDATA #REQUIRED
+                destroy-method CDATA #IMPLIED
+                id CDATA #IMPLIED>
+        <!ELEMENT property (props)*>
+        <!ATTLIST property
+                name CDATA #REQUIRED
+                ref CDATA #IMPLIED
+                value CDATA #IMPLIED>
+        <!ELEMENT props (prop)*>
+        <!ELEMENT prop (#PCDATA)>
+        <!ATTLIST prop
+                key CDATA #REQUIRED>
+        <!ELEMENT tx:annotation-driven (#PCDATA)>
+        <!ATTLIST tx:annotation-driven
+                transaction-manager CDATA #REQUIRED>
+        ]>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -12,7 +43,8 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd">
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/tx ">
 
     <!-- FIXME    Change name of the package to your base-package -->
     <context:component-scan base-package="com.yan.wang"/>
@@ -20,24 +52,24 @@
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp" />
+        <property name="suffix" value=".jsp"/>
     </bean>
 
     <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="com.mysql.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/FinData?useSSL=false&amp;serverTimezone=UTC" />
-        <property name="user" value="ywang" />
-        <property name="password" value="ouafahwafa79" />
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/FinData?useSSL=false&amp;serverTimezone=UTC"/>
+        <property name="user" value="ywang"/>
+        <property name="password" value="ouafahwafa79"/>
         <!-- these are connection pool properties for C3P0 -->
-        <property name="minPoolSize" value="5" />
-        <property name="maxPoolSize" value="20" />
-        <property name="maxIdleTime" value="30000" />
+        <property name="minPoolSize" value="5"/>
+        <property name="maxPoolSize" value="20"/>
+        <property name="maxIdleTime" value="30000"/>
     </bean>
 
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="myDataSource" />
-        <property name="packagesToScan" value="com.yan.wang.model" />
+        <property name="dataSource" ref="myDataSource"/>
+        <property name="packagesToScan" value="com.yan.wang.model"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
@@ -47,7 +79,7 @@
         </property>
     </bean>
 
-    <tx:annotation-driven transaction-manager="transactionManager" />
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>

@@ -91,7 +91,7 @@ public class JUnitSpringExample {
             try{
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection conn= DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/FinData?useSSL=false&amp;serverTimezone=UTC","ywang","ouafahwafa79");
+                        "jdbc:mysql://localhost:3306/FinData?useSSL=false&amp;serverTimezone=UTC","ywang","");
                 // the mysql insert statement
                 String query = " insert into buy_sell_btc_usd (btc_usd_google_trends, buy_bitcoin_google_trends, date, decision, diff_yesterday_today, percentage_btc_usd_buy_bitcoin, price) values (?, ?, ?, ?, ?,?,?)";
 

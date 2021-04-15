@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Spring MVC - Yan Web</title>
+    <title>Hello World</title>
 </head>
 <body>
 <h2>${message}</h2>
